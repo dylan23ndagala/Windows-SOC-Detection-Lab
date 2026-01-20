@@ -10,8 +10,36 @@ This project demonstrates the design and implementation of a small-scale Securit
 - Endpoint: Windows 10 VM
 - Log Collection: Splunk Universal Forwarder
 - Network: VirtualBox Host-Only Network
+<br/>
 
-Confirm Splunk and Splunk Unviersal Forwader is Downloaded: <br/>
+## Lab Setup
+- Confirm Splunk Download and Functioning on Ubuntu VM and Splunk Universal Forwader is Downloaded on Windows 10 VM
+- Ensure port 9997 is open to receive data
+- Ensuring I can see Windows logs
+<br/>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="https://github.com/dylan23ndagala/Windows-SOC-Detection-Lab/blob/90b590af1b12f66008ceae5b3b6b2d09adba3d2c/univdownloadW10.png" width="400"><br>
+      <sub>Windows VM Successful Installation</sub>
+    </td>
+    <td align="center">
+      <img src="https://github.com/dylan23ndagala/Windows-SOC-Detection-Lab/blob/90b590af1b12f66008ceae5b3b6b2d09adba3d2c/Splunk_Home_Page_Success_01.png" width="400"><br>
+      <sub>Ubuntu Successful Installation</sub>
+    </td>
+    <table align="center">
+  <tr>
+    <td align="center">
+      <img src="https://github.com/dylan23ndagala/Windows-SOC-Detection-Lab/blob/a744f00316ccb12e22f57b1c15af6c16924fcaa5/Port%209997%20working.png" width="400"><br>
+      <sub>Port 9997 open</sub>
+    </td>
+    <table align="center">
+    <td align="center">
+      <img src="https://github.com/dylan23ndagala/Windows-SOC-Detection-Lab/blob/a744f00316ccb12e22f57b1c15af6c16924fcaa5/Windows%20Logs%20showing.png" width="400"><br>
+      <sub>Windows Logs working and showing in Splunk</sub>
+    </td>
+  </tr>
+</table>
 
 
 ---
@@ -31,12 +59,58 @@ The following attack scenarios were simulated and detected:
 Detailed detection logic and screenshots for each simulated attack are available below:
 
 [Brute-Force Authentication]
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="https://github.com/dylan23ndagala/Windows-SOC-Detection-Lab/blob/6a10d24f3d1b898680ddbd293f6cd0481e733460/Failed%20Login.png" width="400"><br>
+      <sub>Purposely typing wrong password into Windows Endpoint Device</sub>
+    </td>
+    <td align="center">
+      <img src="https://github.com/dylan23ndagala/Windows-SOC-Detection-Lab/blob/6a10d24f3d1b898680ddbd293f6cd0481e733460/BruteforceA1%20%231.png" width="400"><br>
+      <sub>Using Splunk SIEM on Ubuntu and searching for failed attempts (11 failed attempts found)</sub>
+    </td>
+  </tr>
+   <td align="center">
+      <img src="https://github.com/dylan23ndagala/Windows-SOC-Detection-Lab/blob/6a10d24f3d1b898680ddbd293f6cd0481e733460/BruteForceA1%20%232.png" width="400"><br>
+      <sub>Splunk Providing additonal details from the attack attempt</sub>
+    </td>
+  </tr>
+</table>
 
-[Successful Login After Failures]
+[Successful Login After Failures (Account Compromise)]
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="https://github.com/dylan23ndagala/Windows-SOC-Detection-Lab/blob/6a10d24f3d1b898680ddbd293f6cd0481e733460/AccountCompA2%231.png" width="400"><br>
+      <sub>Using a similar search, This is what it would look like if the account was compromised and the brute force attack worked</sub>
+    </td>
+    <td align="center">
+      <img src="https://github.com/dylan23ndagala/Windows-SOC-Detection-Lab/blob/6a10d24f3d1b898680ddbd293f6cd0481e733460/AccountCompA2%20%232.png" width="400"><br>
+      <sub>Splunk providing more detail for which account was compromised</sub>
+    </td>
+  </tr>
+</table>
 
 [Privilege Escalation]
 
+
 [Unauthorized Account Creation]
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="https://github.com/dylan23ndagala/Windows-SOC-Detection-Lab/blob/a744f00316ccb12e22f57b1c15af6c16924fcaa5/UnAuthAccCreationA3%20%231.png" width="400"><br>
+      <sub>Using Windows Vm to simulate an attacker making account named persistence1</sub>
+    </td>
+    <td align="center">
+      <img src="https://github.com/dylan23ndagala/Windows-SOC-Detection-Lab/blob/a744f00316ccb12e22f57b1c15af6c16924fcaa5/UnAuthAccCreationA3%20%232.png" width="400"><br>
+      <sub>Searching with code 4720 and a log is shown indicacting a new account was made</sub>
+    </td>
+    <td align="center">
+      <img src="https://github.com/dylan23ndagala/Windows-SOC-Detection-Lab/blob/a744f00316ccb12e22f57b1c15af6c16924fcaa5/UnAuthAccCreationA3%20%233.png" width="400"><br>
+      <sub>Log shows that indeed an account was created by a user who was on the windows device</sub>
+    </td>
+  </tr>
+</table>
 
 [Account Deletion]
 
